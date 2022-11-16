@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify
 import ntplib
 from time import ctime
 app = Flask(__name__)
@@ -10,9 +10,7 @@ def import_time():
     response = c.request('europe.pool.ntp.org', version=3)
     mytime=ctime(response.tx_time)
     print(mytime)  ##  if you want to see the time it displays
-    return render_template('index.html', time = mytime)
+    return jsonify(time = mytime)
 
 if __name__ == '__main__':
     app.run()
-
-    
